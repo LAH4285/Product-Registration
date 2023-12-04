@@ -1,3 +1,4 @@
+
 server:
 port: 8080
 
@@ -23,4 +24,3 @@ ddl-auto: create
 h2:
 console:
 enabled: true
-
