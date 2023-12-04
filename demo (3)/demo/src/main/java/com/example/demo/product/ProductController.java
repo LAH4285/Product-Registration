@@ -1,8 +1,10 @@
 package com.example.demo.product;
 
+import com.example.demo.core.error.exception.Exception404;
 import com.example.demo.core.utils.ApiUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,14 +39,19 @@ public class ProductController {
         return ResponseEntity.ok(apiResult);
     }
 
-
-    // 업데이트 폼을 사용하지 않고 바로 /update/{id}로 이동하여 업데이트 수행
     @PostMapping("/update/{id}")
-    public void update(@PathVariable Long id, @RequestBody @Valid ProductResponse.FindAllDTO productDTO) {
-        // 여기에서 업데이트 로직 수행
+    public ResponseEntity<String> updateProduct(@PathVariable Long id, @RequestBody ProductResponse.FindAllDTO requestDTO) {
+        try {
+            productService.update(requestDTO);
 
-        productService.update(productDTO);
+            return ResponseEntity.ok("상품 업데이트 성공");
+        } catch (Exception404 e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 
     @GetMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {

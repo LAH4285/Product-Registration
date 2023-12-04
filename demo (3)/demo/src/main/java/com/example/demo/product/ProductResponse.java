@@ -48,6 +48,9 @@ public class ProductResponse {
 
     @Getter
     @Setter
+    @NoArgsConstructor
+    @ToString
+    @AllArgsConstructor
     public static class FindByIdDTO{
         // ** pk
         private Long id;
@@ -70,6 +73,15 @@ public class ProductResponse {
             this.price = product.getPrice();
             this.optionList = optionList.stream().map(OptionDTO::new)
                     .collect(Collectors.toList());
+        }
+        public Product toEntity(){
+            return Product.builder()
+                    .id(id)
+                    .productName(productName)
+                    .description(description)
+                    .image(image)
+                    .price(price)
+                    .build();
         }
     }
 
