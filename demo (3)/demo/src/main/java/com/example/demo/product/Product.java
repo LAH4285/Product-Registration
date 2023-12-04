@@ -1,9 +1,13 @@
 package com.example.demo.product;
 
+import com.example.demo.option.Option;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,10 +31,26 @@ public class Product {
     private String image;
 
     // ** 상품 가격
-    @Column(nullable = false)
     private int price;
 
-    // ** 상품 수량
-    @Column(nullable = false)
-    private int quantity;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Option>  option =  new ArrayList<>();
+
+    @Builder
+    public Product(Long id, String productName, String description, String image, int price, List<Option> option) {
+        this.id = id;
+        this.productName = productName;
+        this.description = description;
+        this.image = image;
+        this.price = price;
+        this.option = option;
+    }
+
+    public void updateFromDTO(ProductResponse.FindAllDTO productDTO){
+
+        this.productName = productDTO.getProductName();
+        this.description = productDTO.getDescription();
+        this.image = productDTO.getImage();
+        this.price = productDTO.getPrice();
+    }
 }
