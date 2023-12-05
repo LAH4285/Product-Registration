@@ -1,9 +1,11 @@
 package com.example.demo.option;
 
 import com.example.demo.product.Product;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.example.demo.product.ProductResponse;
+import lombok.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 public class OptionResponse {
@@ -63,6 +65,14 @@ public class OptionResponse {
             this.optionName = option.getOptionName();
             this.Price = option.getPrice();
             this.quantity = option.getQuantity();
+        }
+
+        public Option toEntity(){
+            return Option.builder()
+                    .optionName(optionName)
+                    .price(Price)
+                    .quantity(quantity)
+                    .build();
         }
     }
 }
