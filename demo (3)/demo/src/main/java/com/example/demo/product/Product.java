@@ -33,6 +33,7 @@ public class Product {
     // ** 상품 가격
     private int price;
 
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Option>  option =  new ArrayList<>();
 

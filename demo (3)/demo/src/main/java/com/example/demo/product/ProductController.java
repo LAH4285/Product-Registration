@@ -17,6 +17,7 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
 
+    // ** 상품 등록
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody @Valid ProductResponse.FindAllDTO findAllDTO, Error error){
         productService.save(findAllDTO);
@@ -38,7 +39,7 @@ public class ProductController {
         ApiUtils.ApiResult<?> apiResult = ApiUtils.success(productResponses);
         return ResponseEntity.ok(apiResult);
     }
-
+    // ** 상품 수정
     @PostMapping("/update/{id}")
     public ResponseEntity<String> updateProduct(@PathVariable Long id, @RequestBody ProductResponse.FindAllDTO requestDTO) {
         try {
@@ -51,8 +52,7 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
-
+    // ** 상품 삭제
     @GetMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         productService.delete(id);

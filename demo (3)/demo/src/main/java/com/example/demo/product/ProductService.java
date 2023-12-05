@@ -23,6 +23,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final OptionRepository optionRepository;
 
+    // ** 상품 등록 저장
     @Transactional
     public void save(ProductResponse.FindAllDTO productDTO){
         Product product = productDTO.toEntity();
@@ -42,7 +43,6 @@ public class ProductService {
     }
 
     // ** 개별상품 검색
-    // DTO안에 리스트가 반환되기 떄문에 ProductResponse.FindByIdDTO사용
     public ProductResponse.FindByIdDTO findByid(Long id) {
         Product product = productRepository.findById(id).orElseThrow(
                 () -> new Exception404("해당 상품을 찾을 수 없습니다> : " + id));
@@ -53,7 +53,7 @@ public class ProductService {
         // ** 검색이 완료된 제품 반환.
         return new ProductResponse.FindByIdDTO(product, optionList);
     }
-
+    // ** 상품 수정
     @Transactional
     public void update(ProductResponse.FindAllDTO productDTO){
         Optional<Product> optionalProduct = productRepository.findById(productDTO.getId());
@@ -66,7 +66,7 @@ public class ProductService {
         }
 
     }
-
+    // ** 상품 삭제
     @Transactional
     public void delete(Long id){
         productRepository.deleteById(id);

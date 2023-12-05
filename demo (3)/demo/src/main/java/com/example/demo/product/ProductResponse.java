@@ -27,6 +27,7 @@ public class ProductResponse {
         // ** 상품 가격
         private int price;
 
+        // 리팩토링 : 비슷한 코드가 2번 이상 사용될 경우
         public FindAllDTO(Product product) {
             this.id = product.getId();
             this.productName = product.getProductName();
@@ -62,7 +63,7 @@ public class ProductResponse {
         private String image;
         // ** 상품 가격
         private int price;
-        // **
+
         private List<OptionDTO> optionList;
 
         public FindByIdDTO(Product product, List<Option> optionList) {
