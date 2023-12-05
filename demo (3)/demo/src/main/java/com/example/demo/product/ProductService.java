@@ -55,7 +55,7 @@ public class ProductService {
     }
     // ** 상품 수정
     @Transactional
-    public void update(ProductResponse.FindAllDTO productDTO){
+    public void update(ProductResponse.FindByIdDTO productDTO){
         Optional<Product> optionalProduct = productRepository.findById(productDTO.getId());
 
         if(optionalProduct.isPresent()){

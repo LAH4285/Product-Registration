@@ -47,7 +47,7 @@ public class Product {
         this.option = option;
     }
 
-    public void updateFromDTO(ProductResponse.FindAllDTO productDTO){
+    public void updateFromDTO(ProductResponse.FindByIdDTO productDTO){
 
         this.productName = productDTO.getProductName();
         this.description = productDTO.getDescription();

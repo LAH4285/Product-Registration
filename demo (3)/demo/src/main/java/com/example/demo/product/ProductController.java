@@ -41,9 +41,19 @@ public class ProductController {
     }
     // ** 상품 수정
     @PostMapping("/update/{id}")
-    public ResponseEntity<String> updateProduct(@PathVariable Long id, @RequestBody ProductResponse.FindAllDTO requestDTO) {
+    public ResponseEntity<String> updateProduct(@PathVariable Long id, @RequestBody ProductResponse.FindByIdDTO requestDTO) {
         try {
-            productService.update(requestDTO);
+            // 기존 상품 조회
+            ProductResponse.FindByIdDTO existingProduct = productService.findByid(id);
+
+            // 기존 상품의 정보를 새로운 DTO 정보로 업데이트
+            existingProduct.setProductName(requestDTO.getProductName());
+            existingProduct.setDescription(requestDTO.getDescription());
+            existingProduct.setImage(requestDTO.getImage());
+            existingProduct.setPrice(requestDTO.getPrice());
+
+            // 상품 업데이트
+            productService.update(existingProduct);
 
             return ResponseEntity.ok("상품 업데이트 성공");
         } catch (Exception404 e) {
