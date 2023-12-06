@@ -2,6 +2,7 @@ package com.example.demo.User;
 import com.example.demo.core.security.JwtTokenProvider;
 import com.example.demo.core.utils.ApiUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,7 @@ import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @RestController
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -33,6 +35,7 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody @Valid UserRequest.JoinDTO requestDTO, Error error) {
 
         String jwt = userService.login(requestDTO);
+        log.info("인증토큰" + jwt);
 
         return ResponseEntity.ok().header(JwtTokenProvider.HEADER, jwt)
                 .body(ApiUtils.success(null));

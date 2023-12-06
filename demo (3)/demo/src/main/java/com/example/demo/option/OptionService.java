@@ -17,7 +17,7 @@ public class OptionService {
     private final ProductRepository productRepository;
 
     @Transactional
-    public Option save(OptionResponse.FindAllDTO optionDTO){
+    public Option save(OptionResponse.FindByProductIdDTO optionDTO){
         Optional<Product> optionalProduct =
                 productRepository.findById(optionDTO.getProductId());
         if(optionalProduct.isPresent()) {

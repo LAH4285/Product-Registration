@@ -43,6 +43,13 @@ public class OptionResponse {
             this.Price = option.getPrice();
             this.quantity = option.getQuantity();
         }
+        public Option toEntity(){
+            return Option.builder()
+                    .optionName(optionName)
+                    .price(Price)
+                    .quantity(quantity)
+                    .build();
+        }
     }
 
     @NoArgsConstructor

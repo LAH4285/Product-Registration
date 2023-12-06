@@ -18,15 +18,11 @@ public class OptionController {
     private final OptionService optionService;
 
     @PostMapping("/option/save")
-    public ResponseEntity save(@RequestBody @Valid OptionResponse.FindAllDTO optionDTO) {
+    public ResponseEntity save(@RequestBody @Valid OptionResponse.FindByProductIdDTO optionDTO) {
 
         Option option = optionService.save(optionDTO);
-        ApiUtils.ApiResult<?> apiResult = ApiUtils.success(option);
-        if(option != null) {
-            return ResponseEntity.ok(apiResult);
-        } else {
-            return new ResponseEntity<>("상품없음.", HttpStatus.NOT_FOUND);
-        }
+
+            return ResponseEntity.ok(option);
     }
     /**
     * @Param id
