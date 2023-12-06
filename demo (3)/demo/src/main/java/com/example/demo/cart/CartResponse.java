@@ -3,13 +3,48 @@ package com.example.demo.cart;
 import com.example.demo.option.Option;
 import com.example.demo.product.Product;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 // ** 디자인패턴과 유사한 방식/ 교차된 연결/ 브릿지패턴과 비슷한 방식
 public class CartResponse {
+
+    @Getter
+    @Setter
+    public static class UpdateDTO{
+        private List<CartDTO> dtoList;
+
+        private Long totalPrice;
+
+        public UpdateDTO(List<Cart> dtoList) {
+            this.dtoList = dtoList.stream().map(CartDTO::new).collect(Collectors.toList());
+            this.totalPrice = totalPrice;
+        }
+
+        @Getter
+        @Setter
+        public class CartDTO{
+            private Long cartId;
+
+            private Long optionId;
+
+            private String optionName;
+
+            private Long Quantity;
+
+            private Long price;
+
+            public CartDTO(Cart cart) {
+                this.cartId = cart.getId();
+                this.optionId = cart.getOption().getId();
+                this.optionName = cart.getOption().getOptionName();
+                this.Quantity = cart.getQuantity();
+                this.price = cart.getPrice();
+            }
+        }
+    }
 
     @Getter
     @Setter
@@ -83,4 +118,5 @@ public class CartResponse {
 
         }
     }
+
 }
