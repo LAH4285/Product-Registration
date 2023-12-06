@@ -1,9 +1,7 @@
 package com.example.demo.option;
 
-import com.example.demo.core.error.exception.Exception404;
 import com.example.demo.product.Product;
 import com.example.demo.product.ProductRepository;
-import com.example.demo.product.ProductResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

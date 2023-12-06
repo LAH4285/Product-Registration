@@ -34,4 +34,11 @@ public class User {
         this.password = password;
         this.roles = roles;
     }
+
+    public void output(){
+        System.out.println(id);
+        System.out.println(email);
+        System.out.println(password);
+        System.out.println(roles);
+    }
 }

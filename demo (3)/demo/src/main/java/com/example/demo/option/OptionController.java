@@ -60,8 +60,6 @@ public class OptionController {
         }
     }
 
-
-
     @DeleteMapping("/option/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         optionService.delete(id);
