@@ -42,6 +42,7 @@ public class UserService {
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken
                     = new UsernamePasswordAuthenticationToken(requestDTO.getEmail(), requestDTO.getPassword());
 
+            // ** anonymousUser = 비인증
             Authentication authentication =  authenticationManager.authenticate(
                     usernamePasswordAuthenticationToken
             );

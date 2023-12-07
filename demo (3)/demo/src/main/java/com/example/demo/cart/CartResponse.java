@@ -115,8 +115,6 @@ public class CartResponse {
                     this.price = option.getPrice();
                 }
             }
-
         }
     }
-
 }
