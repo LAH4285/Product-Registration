@@ -17,7 +17,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    // ** CustomUserDetailsService 의 loadUserByUsername 메서드는 사용자가 로그인을 시도할 때 Spring Security에 의해 자동으로 실행.
+    // ** CustomUserDetailsService 의 loadUserByUsername 메서드는 사용에 의해 자동으로자가 로그인을 시도할 때 Spring Security 실행.
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         // ** CustomUserDetailsService 클래스는 Spring Security의 UserDetailsService 인터페이스를 구현하여, 사용자 이름으로 사용자 정보를 로드하는 로직을 제공합니다.

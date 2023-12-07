@@ -28,7 +28,7 @@ public class CartController {
         ApiUtils.ApiResult<?> apiResult = ApiUtils.success(null);
         return ResponseEntity.ok( ApiUtils.success(apiResult) );
     }
-
+    //** 카트 수정
     @GetMapping("/carts/update")
     public ResponseEntity<?> update(
             @RequestBody @Valid List<CartRequest.UpdateDTO> requestDTO,

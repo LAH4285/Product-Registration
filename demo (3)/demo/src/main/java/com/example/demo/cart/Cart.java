@@ -20,7 +20,7 @@ import javax.persistence.*;
             @UniqueConstraint(name = "uk_cart_option_user", columnNames = {"user_id", "option_id"})
         })
 public class Cart {
-
+    // ** PK
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,10 +31,10 @@ public class Cart {
     // ** user별로 카트에 묶임
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-
+    // ** 수량
     @Column(nullable = false)
     private Long Quantity;
-
+    // ** 가격
     @Column(nullable = false)
     private Long price;
 

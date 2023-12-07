@@ -26,7 +26,7 @@ public class OrderService {
     public OrderResponse.FindByIdDTO save(User user) {
         // ** 장바구니 조회.
         List<Cart> cartList = cartRepository.findAllByUserId(user.getId());
-
+        // ** 장바구니가 비어있을 때
         if(cartList.isEmpty()){
             throw new Exception404("장바구니에 상품 내역이 존재하지 않습니다.");
         }
@@ -46,26 +46,27 @@ public class OrderService {
                     .build();
             itemList.add(item);
         }
-
+        // ** 예외처리
         try{
             itemRepository.saveAll(itemList);
         }catch (Exception e){
             throw new Exception500("결제 실패");
         }
-
+        // ** FindByIdDTO 객체에 데이터를 매개변수로 반환
         return new OrderResponse.FindByIdDTO(order, itemList);
-
     }
 
+    
     public OrderResponse.FindByIdDTO findById(Long id) {
+        // ** order에 ID가 없을 경우 404에러반환
         Order order = orderRepository.findById(id).orElseThrow(
         () -> new Exception404("해당 주문 내역을 찾을 수 없습니다 : " + id));
-
+        // ** orderID의 리스트에 조회
         List<Item> itemList = itemRepository.findAllByOrderId(id);
-
+        // ** 조회한 order와 itemlist를 객체에 반환
         return  new OrderResponse.FindByIdDTO(order, itemList);
     }
-
+    // ** 장바구니 삭제
     public void clear() {
         try{
             itemRepository.deleteAll();

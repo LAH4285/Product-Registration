@@ -12,14 +12,14 @@ import javax.persistence.*;
 @Getter
 @Table(name = "Order_tb",
         indexes = {
-        @Index(name = "Order_user_id_index", columnList = "user_id")
+        @Index(name = "Order_user_id_index", columnList = "user_id")     // ** DB의 이름 설정
 })
 public class Order {
-
+    // ** PK
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    // ** User를 불러옴
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 

@@ -33,7 +33,7 @@ public class Product {
     // ** 상품 가격
     private int price;
 
-
+    // ** Option과의 연관관계
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Option>  option =  new ArrayList<>();
 

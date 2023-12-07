@@ -34,7 +34,7 @@ public class CartService {
         // ** 동일한 데이터를 묶어줌
         // ** 동일한 상품 예외처리
         Set<Long> optionsid = new HashSet<>();
-
+        // saveDTO의 cart의 옵션아이디가 중복이라면 예외처리
         for(CartRequest.SaveDTO cart : saveDTO){
             if(!optionsid.add(cart.getOptionId()));
             throw new Exception400("이미 동일한 상품 옵션이 있습니다" + cart.getOptionId());
