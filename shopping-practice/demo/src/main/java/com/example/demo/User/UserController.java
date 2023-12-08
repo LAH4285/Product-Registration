@@ -14,7 +14,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @RestController
 @Slf4j
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;

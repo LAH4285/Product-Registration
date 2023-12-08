@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Join Form</title>
@@ -8,15 +8,19 @@
 
 <h1>Join</h1>
 
-<form id="joinForm" method="POST">
+<form th:action="@{/user/join}" method="post" id="joinForm">
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required><br><br>
 
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required><br><br>
 
+    <label for="userName">userName:</label>
+    <input type="userName" id="userName" name="userName" required><br><br>
+
     <input type="submit" value="Submit">
 </form>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -26,14 +30,16 @@
 
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const userName = document.getElementById('userName').value;
 
             const data = {
                 email,
-                password
+                password,
+                userName
             };
 
             try {
-                const response = await fetch('http://localhost:8080/users/join', {
+                const response = await fetch(form.getAttribute('action'), {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -45,9 +51,9 @@
 
                 if (result.success) {
                     alert("회원가입에 성공했습니다!");
-                    location.href = '/';
+                    location.href = '/login';
                 } else {
-                    alert("Error: " + "result.error.message");
+                    alert("Error: " + result.error.message);
                 }
 
             } catch (error) {

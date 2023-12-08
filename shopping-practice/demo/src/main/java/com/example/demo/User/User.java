@@ -23,21 +23,26 @@ public class User {
     @Column(length = 256, nullable = false)
     private String password;
 
+    @Column(length = 256, nullable = false)
+    private String userName;
+
     @Column(length = 30)
     @Convert(converter = StringArrayConverter.class)
     private List<String> roles = new ArrayList<>();
 
     @Builder
-    public User(Long id, String email, String password, List<String> roles) {
+    public User(Long id, String email, String password, String userName, List<String> roles) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.userName = userName;
         this.roles = roles;
     }
 
     public void output(){
         System.out.println(id);
         System.out.println(email);
+        System.out.println(userName);
         System.out.println(password);
         System.out.println(roles);
     }

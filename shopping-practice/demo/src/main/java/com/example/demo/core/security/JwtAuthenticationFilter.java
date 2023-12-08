@@ -43,7 +43,7 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
         String jwt = prefixJwt.replace(JwtTokenProvider.TOKEN_PREFIX, "");
 
         try {
-            log.debug("토근 있음.");
+            log.debug("토큰 있음.");
 
             // ** 토큰 검증
             DecodedJWT decodedJWT = JwtTokenProvider.verify(jwt);
