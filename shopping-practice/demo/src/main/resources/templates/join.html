@@ -8,7 +8,7 @@
 
 <h1>Join</h1>
 
-<form id="joinForm">
+<form id="joinForm" method="POST">
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required><br><br>
 
@@ -33,7 +33,7 @@
             };
 
             try {
-                const response = await fetch('http://localhost:8080/join', {
+                const response = await fetch('http://localhost:8080/users/join', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -45,8 +45,9 @@
 
                 if (result.success) {
                     alert("회원가입에 성공했습니다!");
+                    location.href = '/';
                 } else {
-                    alert("Error: " + result.error.message);
+                    alert("Error: " + "result.error.message");
                 }
 
             } catch (error) {

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>paging</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f6f6f6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4285f4;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #3367d6;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .pagination-link {
+            padding: 5px;
+            margin: 0 2px;
+            text-decoration: none;
+            color: #4285f4;
+            border-radius: 3px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .pagination-link:hover {
+            background-color: #4285f4;
+            color: #fff;
+        }
+
+        .pagination-link.active {
+            background-color: #4285f4;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td colspan="3">
+            <button class="button" onclick="create()">글쓰기</button>
+        </td>
+    </tr>
+    <tr th:each="board: ${boardList}">
+        <td th:text="${board.getId}"></td>
+        <td>
+            <a th:href="@{${board.getId}|(page = ${boardList.number + 1})}" th:text="${board.getTitle()}"></a>
+        </td>
+        <td th:text="*{#temporals.format(board.getCreateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+    </tr>
+</table>
+<div class="pagination">
+    <a th:href="@{/paging(page=1)}" class="pagination-link">처음</a>
+    <a th:href="${boardList.hasPrevious()} ? @{/paging(page=${boardList.number})} : '#'" class="pagination-link">이전</a>
+    <span th:each="page: ${#numbers.sequence(startPage, endPage)}">
+            <span th:if="${page == boardList.number + 1}" class="pagination-link active" th:text="${page}"></span>
+            <a th:href="@{/paging(page=${page})}" th:unless="${page == boardList.number + 1}" class="pagination-link" th:text="${page}"></a>
+        </span>
+    <a th:href="${boardList.hasNext()} ? @{/paging(page=${boardList.number + 2})} : '#'" class="pagination-link">다음</a>
+    <a th:href="@{/paging(page=${boardList.totalPages})}" class="pagination-link">마지막</a>
+</div>
+</body>
+<script>
+    const create = () => {
+        location.href = "/board/create";
+    }
+</script>
+</html>
