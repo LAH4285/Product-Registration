@@ -103,7 +103,6 @@
     <a href="/board/paging" class="btn btn-primary button">목록</a>
     <a href="/board/create" class="btn btn-primary button">글쓰기</a>
     <button type="button" onclick="redirectToJoin()">로그인</button>
-    <button type="button" onclick="getTokenAndSendRequest()">요청 보내기</button>
 </div>
 <div class="footer">
     <p>아현 블로그입니다 이쁘게 봐주세요.</p>
@@ -116,35 +115,6 @@
 <script>
     function redirectToJoin() {
         window.location.href = 'http://localhost:8080/login';
-    }
-
-    function getTokenAndSendRequest() {
-        // 토큰을 로컬 스토리지에서 가져오기
-        const accessToken = localStorage.getItem('accessToken');
-
-        // 만약 토큰이 없다면 로그인 페이지로 이동
-        if (!accessToken) {
-            redirectToJoin();
-            return;
-        }
-
-        // 요청을 보낼 URL
-        const apiUrl = 'http://localhost:8080/api/user/info';
-
-        // 헤더 설정
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
-        };
-
-        // API 요청 보내기
-        fetch(apiUrl, {
-            method: 'GET',
-            headers: headers
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
     }
 </script>
 </body>

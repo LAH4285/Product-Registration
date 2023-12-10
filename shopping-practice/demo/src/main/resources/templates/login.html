@@ -69,8 +69,10 @@
                 // 로그인 성공 시 토큰을 쿠키에 저장
                 document.cookie = "Authorization=" + result.token;
                 alert("로그인 성공!");
-                // 로그인 성공 후 처리
-                location.href = '/';
+
+                // 로그인 성공 후 홈페이지로 이동
+                window.location.href = 'http://localhost:8080/';
+
             } else {
                 alert("Error: " + result.error.message);
             }
