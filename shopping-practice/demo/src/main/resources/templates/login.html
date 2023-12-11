@@ -23,9 +23,6 @@
 
     <!-- 회원가입 버튼 추가 -->
     <button type="button" onclick="redirectToJoin()">Join</button>
-
-    <!-- 토큰 저장 및 확인 버튼 -->
-    <button type="button" onclick="retrieveToken()">Retrieve Token</button>
 </form>
 
 <script>
@@ -37,14 +34,6 @@
         form.submit();
     }
 
-    async function retrieveToken() {
-        // 여기서 실제로 토큰을 어떻게 사용할지에 따라 코드를 수정해야 합니다.
-        // 이 예제에서는 "Authorization" 쿠키를 읽어와서 토큰을 출력합니다.
-        const token = getCookie("Authorization");
-        alert("Retrieved Token: " + token);
-    }
-
-    // 수정된 부분: login 함수를 별도로 정의
     async function login() {
         const email = document.getElementById('loginEmail').value;
         const password = document.getElementById('loginPassword').value;
