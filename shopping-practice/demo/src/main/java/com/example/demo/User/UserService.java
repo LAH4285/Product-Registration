@@ -30,6 +30,7 @@ public class UserService {
     public void join(UserRequest.JoinDTO requestDTO) throws Exception500 {
         checkEmail(requestDTO.getEmail());
 
+
         String encodedPassword = passwordEncoder.encode(requestDTO.getPassword());
         requestDTO.setPassword(encodedPassword);
 
@@ -50,11 +51,16 @@ public class UserService {
             // ** 인증 완료 값을 받아온다.
             CustomUserDetails customUserDetails = (CustomUserDetails)authentication.getPrincipal();
 
+
+
             // ** 토큰 발급.
             return JwtTokenProvider.create(customUserDetails.getUser());
 
         }catch (Exception e){
             // 401 반환.
+            String encodedPassword = passwordEncoder.encode("qwer1234!");
+            System.out.println(encodedPassword);
+            log.info("인증번호" + encodedPassword);
             throw new Exception401("인증되지 않음.");
         }
     }
